@@ -42,6 +42,5 @@ checkValue()
 
 
 // verifer les doublons
-inputs.addEventListener()
 
-    // const duplicate = new Set();
+
