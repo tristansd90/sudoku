@@ -2,7 +2,6 @@ const plateau = document.querySelector("#plateau");
 const inputs = document.querySelectorAll("input");
 let hasWon = false;
 
-
 const sudoku = [
     [1, 0, 6, 0, 3, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 8, 2, 0, 0],
@@ -16,7 +15,6 @@ const sudoku = [
 ];
 
 // recuperer les valeurs du tableau js et les placer dans la table html.
-// remplacer les 0 par des numeros valides
 sudoku.forEach((row, numRow) => {
     row.forEach((column, numColumn) => {
         if (column == 0) {
@@ -25,17 +23,9 @@ sudoku.forEach((row, numRow) => {
             plateau.children[numRow].children[numColumn].firstChild.value = column;
             plateau.children[numRow].children[numColumn].firstChild.disabled = true;
         }
-
-        plateau.children[numRow].children[numColumn].firstChild.addEventListener("keyup", (e) => {
-            if (e.key === "Enter") {
-                sudoku[numRow][numColumn] = parseInt(plateau.children[numRow].children[numColumn].firstChild.value);
-                console.log(sudoku);
-            }
-        })
     });
 });
 
-//verifier les valeurs entre 0 et 9, et si valide les ajouter au tableau suddoku
 function checkValue() {
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener("keyup", () => {
@@ -46,22 +36,24 @@ function checkValue() {
             };
         })
     }
+
+    sudoku.forEach((row, numRow) => {
+        row.forEach((column, numColumn) => {
+            plateau.children[numRow].children[numColumn].firstChild.addEventListener("keyup", (e) => {
+                if (e.key === "Enter") {
+                    console.log(sudoku);
+                    sudoku[numRow][numColumn] = parseInt(plateau.children[numRow].children[numColumn].firstChild.value);
+                }
+            })
+        });
+    });
+
 };
 checkValue();
 
-// function addValue() {
-//     sudoku.forEach((row, numRow) => {
-//         row.forEach((column, numColumn) => {
-
-
-
-//             inputs.addEventListener("keyup", (e) => {
-//                 if (e.key === "Enter") { 
-//                     sudoku[numRow][numColumn] = parseInt(column.value);
-//                     console.log(sudoku);
-//                 }
-//             })
-//         });
-//     });
-// };
-// addValue();
+// for (let i = 0; i < sudoku.length; i++) {
+//     for (let j = 0; j < sudoku.length; j++) {
+//         if (sudoku[i][j] == value) {
+//         }
+//     }
+// };  
