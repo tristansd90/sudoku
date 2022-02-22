@@ -25,6 +25,10 @@ input {
     font-size: 30px;
     text-align: center;
 }
+input:invalid, .invalid {
+    border: solid 2px red;
+    background-color: rgb(218, 163, 163);
+}
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button { 
 	-webkit-appearance: none;
@@ -35,11 +39,6 @@ tr td:nth-child(3), tr td:nth-child(6) {
 tr:nth-child(3), tr:nth-child(6) {
     border-bottom: solid 6px;
 }
-.error_value {
-    border: solid 2px red;
-    background-color: rgb(218, 163, 163);
-}
-
 button {
     display: block;
     margin: 10px auto;

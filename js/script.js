@@ -1,5 +1,6 @@
 const plateau = document.querySelector("#plateau");
-const inputs = document.querySelectorAll("input");
+const inputElts = document.querySelectorAll("input");
+const btnchecked = document.querySelector("#checked");
 let hasWon = false;
 
 const sudoku = [
@@ -14,7 +15,9 @@ const sudoku = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-// recuperer les valeurs du tableau js et les placer dans la table html.
+
+
+// initialiser le tableau html avec les valeurs du tableau sudoku ----------
 sudoku.forEach((row, numRow) => {
     row.forEach((column, numColumn) => {
         if (column == 0) {
@@ -25,31 +28,62 @@ sudoku.forEach((row, numRow) => {
         }
     });
 });
+// --------------------------------------------------------------------------
 
-function checkValue() {
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].addEventListener("keyup", () => {
-            if (inputs[i].value < 1 || inputs[i].value > 9) {
-                inputs[i].classList.add("error_value");
-            } else {
-                inputs[i].classList.remove("error_value");
-            };
-        })
-    }
 
+
+function verifier() {
+
+    // verifie les valeurs de 1 à 9 
+    inputElts.forEach(input => {
+        const inputValide = input.checkValidity(); 
+        // console.log(inputValide);
+        if (inputValide === false) return
+    });
+    // -------------------- 
+    // for (let i = 0; i < inputElts.length; i++) {
+    //     inputElts[i].addEventListener("keyup", () => {
+    //         if (inputElts[i].value < 1 || inputElts[i].value > 9) {
+    //             inputElts[i].classList.add("error_value");
+    //         } else {
+    //             inputElts[i].classList.remove("error_value");
+    //         };
+    //     })
+    // };
+    //------------------------------------------------------------------------------------
+
+    // for (let row = 0; row < 9; row++) {
+    //     // console.log(row);
+    //     for (let column = 0; column < 9; column++) {
+    //         const identifiant = "case" + row + "-" + column;
+    //         // console.log(identifiant);
+    //         const input = document.getElementById(identifiant);
+    //         const valeur = input.value;
+    //         const nombre = valeur === "" ? "" : parseInt(valeur, 10); 
+    //     }
+    // };  
+    // ------------------------
     sudoku.forEach((row, numRow) => {
         row.forEach((column, numColumn) => {
             plateau.children[numRow].children[numColumn].firstChild.addEventListener("keyup", (e) => {
                 if (e.key === "Enter") {
                     console.log(sudoku);
                     sudoku[numRow][numColumn] = parseInt(plateau.children[numRow].children[numColumn].firstChild.value);
+
+                    const identifiant = "case" + row + "-" + column;
+                    console.log(identifiant);
+                    const input = document.getElementById(identifiant);
+                    // const valeur = input.value;
+                    const valeur = plateau.children[numRow].children[numColumn].firstChild.value;
+                    const nombre = valeur === "" ? "" : parseInt(valeur, 10); 
                 }
             })
         });
     });
-
 };
-checkValue();
+btnchecked.addEventListener("click", verifier());
+
+
 
 // for (let i = 0; i < sudoku.length; i++) {
 //     for (let j = 0; j < sudoku.length; j++) {
@@ -57,3 +91,25 @@ checkValue();
 //         }
 //     }
 // };  
+
+
+
+
+//------- CHECKED DOUBLE VALUES -----------------
+    //for (let row = 0; row < 9; row++) {
+        // const liste = new Set();
+        //for (let column = 0; column < 9; column++) {
+            // const valeur = sudoku[row][column];
+            // console.log(valeur);
+            // if (valeur === 0) {
+
+            // } else {
+            //     const valeurExiste = liste.has(valeur)
+            //     if (valeurExiste) {
+            //         console.log("doublons", row, "-", column);
+            //     } else {
+            //         liste.add(valeur);
+            //     }
+            // }
+        //};
+    //};
