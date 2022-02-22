@@ -28,61 +28,32 @@ sudoku.forEach((row, numRow) => {
         }
     });
 });
-// --------------------------------------------------------------------------
-
-
 
 function verifier() {
 
-    // verifie les valeurs de 1 à 9 
-    inputElts.forEach(input => {
-        const inputValide = input.checkValidity(); 
-        // console.log(inputValide);
-        if (inputValide === false) return
-    });
-    // -------------------- 
-    // for (let i = 0; i < inputElts.length; i++) {
-    //     inputElts[i].addEventListener("keyup", () => {
-    //         if (inputElts[i].value < 1 || inputElts[i].value > 9) {
-    //             inputElts[i].classList.add("error_value");
-    //         } else {
-    //             inputElts[i].classList.remove("error_value");
-    //         };
-    //     })
-    // };
-    //------------------------------------------------------------------------------------
+    for (let i = 0; i < inputElts.length; i++) {
+        inputElts[i].addEventListener("keyup", () => {
+            if (inputElts[i].value < 1 || inputElts[i].value > 9) {
+                inputElts[i].classList.add("error_value");
+            } else {
+                inputElts[i].classList.remove("error_value");
+            };
+        })
+    };
 
-    // for (let row = 0; row < 9; row++) {
-    //     // console.log(row);
-    //     for (let column = 0; column < 9; column++) {
-    //         const identifiant = "case" + row + "-" + column;
-    //         // console.log(identifiant);
-    //         const input = document.getElementById(identifiant);
-    //         const valeur = input.value;
-    //         const nombre = valeur === "" ? "" : parseInt(valeur, 10); 
-    //     }
-    // };  
-    // ------------------------
     sudoku.forEach((row, numRow) => {
         row.forEach((column, numColumn) => {
             plateau.children[numRow].children[numColumn].firstChild.addEventListener("keyup", (e) => {
                 if (e.key === "Enter") {
                     console.log(sudoku);
                     sudoku[numRow][numColumn] = parseInt(plateau.children[numRow].children[numColumn].firstChild.value);
-
-                    const identifiant = "case" + row + "-" + column;
-                    console.log(identifiant);
-                    const input = document.getElementById(identifiant);
-                    // const valeur = input.value;
-                    const valeur = plateau.children[numRow].children[numColumn].firstChild.value;
-                    const nombre = valeur === "" ? "" : parseInt(valeur, 10); 
                 }
             })
         });
     });
 };
-btnchecked.addEventListener("click", verifier());
 
+verifier();
 
 
 // for (let i = 0; i < sudoku.length; i++) {
@@ -90,26 +61,4 @@ btnchecked.addEventListener("click", verifier());
 //         if (sudoku[i][j] == value) {
 //         }
 //     }
-// };  
-
-
-
-
-//------- CHECKED DOUBLE VALUES -----------------
-    //for (let row = 0; row < 9; row++) {
-        // const liste = new Set();
-        //for (let column = 0; column < 9; column++) {
-            // const valeur = sudoku[row][column];
-            // console.log(valeur);
-            // if (valeur === 0) {
-
-            // } else {
-            //     const valeurExiste = liste.has(valeur)
-            //     if (valeurExiste) {
-            //         console.log("doublons", row, "-", column);
-            //     } else {
-            //         liste.add(valeur);
-            //     }
-            // }
-        //};
-    //};
+// };
