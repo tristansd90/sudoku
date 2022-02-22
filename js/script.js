@@ -15,22 +15,28 @@ const sudoku = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-
+// 
+function isRowOk(value, rowNumber) {
+    inputElts[i].addEventListener("keyup", () => {
+        if (plateau.children[i].children[rowNumber].firstChild.value == value) {
+            console.log("doublon");
+        }
+    })
+};
 
 // initialiser le tableau html avec les valeurs du tableau sudoku ----------
-sudoku.forEach((row, numRow) => {
-    row.forEach((column, numColumn) => {
+sudoku.forEach((row, rowNumber) => {
+    row.forEach((column, columnNumber) => {
         if (column == 0) {
-            plateau.children[numRow].children[numColumn].firstChild.value = "";
+            plateau.children[rowNumber].children[columnNumber].firstChild.value = "";
         } else {
-            plateau.children[numRow].children[numColumn].firstChild.value = column;
-            plateau.children[numRow].children[numColumn].firstChild.disabled = true;
+            plateau.children[rowNumber].children[columnNumber].firstChild.value = column;
+            plateau.children[rowNumber].children[columnNumber].firstChild.disabled = true;
         }
     });
 });
 
-function verifier() {
-
+function checkValue(value, r) {
     for (let i = 0; i < inputElts.length; i++) {
         inputElts[i].addEventListener("keyup", () => {
             if (inputElts[i].value < 1 || inputElts[i].value > 9) {
@@ -38,27 +44,19 @@ function verifier() {
             } else {
                 inputElts[i].classList.remove("error_value");
             };
+            isRowOk(value, rowNumber);
         })
     };
 
-    sudoku.forEach((row, numRow) => {
-        row.forEach((column, numColumn) => {
-            plateau.children[numRow].children[numColumn].firstChild.addEventListener("keyup", (e) => {
+    sudoku.forEach((row, rowNumber) => {
+        row.forEach((column, columnNumber) => {
+            plateau.children[rowNumber].children[columnNumber].firstChild.addEventListener("keyup", (e) => {
                 if (e.key === "Enter") {
                     console.log(sudoku);
-                    sudoku[numRow][numColumn] = parseInt(plateau.children[numRow].children[numColumn].firstChild.value);
+                    sudoku[rowNumber][columnNumber] = parseInt(plateau.children[rowNumber].children[columnNumber].firstChild.value);
                 }
             })
         });
     });
 };
-
-verifier();
-
-
-// for (let i = 0; i < sudoku.length; i++) {
-//     for (let j = 0; j < sudoku.length; j++) {
-//         if (sudoku[i][j] == value) {
-//         }
-//     }
-// };
+checkValue();

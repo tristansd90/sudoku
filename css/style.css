@@ -25,7 +25,7 @@ input {
     font-size: 30px;
     text-align: center;
 }
-input:invalid, .invalid {
+.error_value {
     border: solid 2px red;
     background-color: rgb(218, 163, 163);
 }
